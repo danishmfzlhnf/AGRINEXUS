@@ -95,11 +95,6 @@
                                     <a href="#roadmap" className="text-slate-600 hover:text-agri-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Peta Jalan</a>
                                 </div>
                             </div>
-                            <div className="hidden md:flex items-center space-x-4">
-                                <a href="#" className="bg-agri-600 hover:bg-agri-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg flex items-center gap-1">
-                                    Buka Dashboard
-                                </a>
-                            </div>
                             
                             {/* Mobile menu button */}
                             <div className="flex items-center md:hidden">
@@ -117,9 +112,6 @@
                                 <a href="#solusi" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-agri-600 hover:bg-agri-50">Solusi</a>
                                 <a href="#fitur" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-agri-600 hover:bg-agri-50">Fitur</a>
                                 <a href="#roadmap" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-agri-600 hover:bg-agri-50">Peta Jalan</a>
-                                <div className="mt-4 pt-4 border-t border-slate-200 flex flex-col gap-2">
-                                    <a href="#" className="block w-full text-center bg-agri-600 text-white px-3 py-2 rounded-md font-medium">Buka Dashboard</a>
-                                </div>
                             </div>
                         </div>
                     )}
@@ -148,10 +140,6 @@
                                     AGRINEXUS adalah pusat kendali terintegrasi untuk Pertanian, Peternakan, dan Perikanan. Optimalkan hasil panen, tekan biaya, dan deteksi anomali lebih dini.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                                    <a href="#" className="bg-agri-600 hover:bg-agri-700 text-white px-8 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group">
-                                        Eksplorasi Dashboard
-                                        <span className="group-hover:translate-x-1 transition-transform"><Icons.ChevronRight /></span>
-                                    </a>
                                     <a href="#solusi" className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-3 rounded-full font-medium transition-all flex items-center justify-center">
                                         Pelajari Lebih Lanjut
                                     </a>
@@ -576,6 +564,130 @@
             );
         };
 
+        const ImpactChart = () => {
+            const data = [
+                { sector: 'Pertanian', resourceEfficiency: 30, yieldIncrease: 20, lossReduction: 15 },
+                { sector: 'Peternakan', resourceEfficiency: 15, yieldIncrease: 25, lossReduction: 20 },
+                { sector: 'Perikanan', resourceEfficiency: 25, yieldIncrease: 30, lossReduction: 30 }
+            ];
+
+            const maxValue = 35; // Maximum Y-axis value
+            
+            // Helper function to calculate height percentage
+            const getHeight = (value) => `${(value / maxValue) * 100}%`;
+
+            return (
+                <div className="py-20 bg-slate-50 border-t border-slate-200">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                        
+                        <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-slate-100">
+                            <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-6">
+                                Perbandingan Pengaruh AI dalam Agrokompleks (%)
+                            </h3>
+                            
+                            {/* Legend */}
+                            <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-10 text-sm md:text-base text-slate-600">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                                    <span>Efisiensi Sumber Daya</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full bg-orange-500"></div>
+                                    <span>Peningkatan Hasil/Akurasi</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-4 h-4 rounded-full bg-purple-600"></div>
+                                    <span>Penurunan Kerugian</span>
+                                </div>
+                            </div>
+
+                            {/* Chart Area */}
+                            <div className="relative h-80 md:h-96 w-full pt-10 pb-8 flex">
+                                {/* Y-Axis Scale (Percentage) */}
+                                <div className="flex flex-col justify-between items-end pr-4 text-xs md:text-sm text-slate-500 font-medium h-full w-12 md:w-16">
+                                    <span>35%</span>
+                                    <span>30%</span>
+                                    <span>25%</span>
+                                    <span>20%</span>
+                                    <span>15%</span>
+                                    <span>10%</span>
+                                    <span>5%</span>
+                                    <span>0%</span>
+                                </div>
+
+                                {/* Main Chart Grid and Bars */}
+                                <div className="relative flex-1 border-l border-b border-slate-300 h-full">
+                                    
+                                    {/* Y-Axis Grid Lines */}
+                                    <div className="absolute inset-0 flex flex-col justify-between z-0 pointer-events-none">
+                                        {[...Array(8)].map((_, i) => (
+                                            <div key={i} className="w-full border-t border-slate-100 h-0"></div>
+                                        ))}
+                                    </div>
+
+                                    {/* Bars Container */}
+                                    <div className="absolute inset-0 z-10 flex justify-around items-end pb-0 px-2 md:px-10">
+                                        {data.map((item, index) => (
+                                            <div key={index} className="flex gap-1 md:gap-3 items-end h-full w-full justify-center group relative">
+                                                
+                                                {/* Bar 1: Resource Efficiency */}
+                                                <div className="relative w-8 md:w-16 bg-blue-500 rounded-t-lg transition-all duration-500 ease-out hover:opacity-90 flex flex-col justify-end"
+                                                     style={{ height: getHeight(item.resourceEfficiency) }}>
+                                                    <span className="absolute -top-6 w-full text-center text-xs md:text-sm font-medium text-slate-600">
+                                                        {item.resourceEfficiency}%
+                                                    </span>
+                                                </div>
+
+                                                {/* Bar 2: Yield Increase */}
+                                                <div className="relative w-8 md:w-16 bg-orange-500 rounded-t-lg transition-all duration-500 ease-out hover:opacity-90 flex flex-col justify-end"
+                                                     style={{ height: getHeight(item.yieldIncrease) }}>
+                                                    <span className="absolute -top-6 w-full text-center text-xs md:text-sm font-medium text-slate-600">
+                                                        {item.yieldIncrease}%
+                                                    </span>
+                                                </div>
+
+                                                {/* Bar 3: Loss Reduction */}
+                                                <div className="relative w-8 md:w-16 bg-purple-600 rounded-t-lg transition-all duration-500 ease-out hover:opacity-90 flex flex-col justify-end"
+                                                     style={{ height: getHeight(item.lossReduction) }}>
+                                                    <span className="absolute -top-6 w-full text-center text-xs md:text-sm font-medium text-slate-600">
+                                                        {item.lossReduction}%
+                                                    </span>
+                                                </div>
+
+                                                {/* X-Axis Label */}
+                                                <div className="absolute -bottom-10 w-full text-center text-sm md:text-base font-medium text-slate-700">
+                                                    {item.sector}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                {/* Y-Axis Label (Rotated) */}
+                                <div className="absolute top-1/2 -left-4 md:left-2 -translate-y-1/2 -rotate-90 text-sm font-semibold text-slate-600 tracking-wider">
+                                    Persentase (%)
+                                </div>
+                            </div>
+                            
+                            {/* X-Axis General Label */}
+                            <div className="text-center mt-12 mb-4 font-semibold text-slate-700">
+                                Sektor
+                            </div>
+                            
+                            {/* Source Data Link */}
+                            <div className="mt-8 pt-4 border-t border-slate-100 text-right text-xs md:text-sm text-slate-500">
+                                <span className="font-medium text-slate-600">Sumber data: </span> 
+                                <a href="https://jurnalistiqomah.org/index.php/merdeka/article/view/7436" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                    https://jurnalistiqomah.org/index.php/merdeka/article/view/7436
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
         const Footer = () => {
             return (
                 <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 border-t border-slate-800">
@@ -624,6 +736,7 @@
                     <Sectors />
                     <Features />
                     <Roadmap />
+                    <ImpactChart />
                     <Footer />
                 </div>
             );
